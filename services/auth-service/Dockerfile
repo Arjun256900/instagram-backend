@@ -2,27 +2,28 @@ FROM node:24-alpine
 
 WORKDIR /app
 
-COPY package*.json ./
-
-# Copy shared package
+# Copy shared package first
 COPY packages/shared/package*.json ./packages/shared/
-COPY packages/shared ./packages/shared/
+COPY packages/shared ./packages/shared
 
-# Copy auth service
-COPY services/auth-service/package*.json ./services/auth-service/
-COPY services/auth-service ./services/auth-service/
-
-# Install dependencies for shared package
+# Install shared dependencies
 WORKDIR /app/packages/shared
 RUN npm install
 
-# Install dependencies for auth service
+# Copy auth-service
+WORKDIR /app
+COPY services/auth-service/package*.json ./services/auth-service/
+COPY services/auth-service ./services/auth-service
+
+# Install auth-service dependencies
 WORKDIR /app/services/auth-service
 RUN npm install
 
-WORKDIR /app
-
+# Expose port
 EXPOSE 5000
 
-# Start the service
-CMD ["node", "services/auth-service/server.js"]
+# Set working directory to auth-service for npm commands
+WORKDIR /app/services/auth-service
+
+# Start the service (this will use package.json in current dir)
+CMD ["npm", "run", "dev"]

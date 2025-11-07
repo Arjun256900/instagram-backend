@@ -1,0 +1,41 @@
+version: "3.8"
+
+services:
+  gateway:
+    build:
+      context: ./services/gateway
+      dockerfile: Dockerfile
+    container_name: instagram-gateway
+    ports:
+      - "80:80"
+    depends_on:
+      - auth-service
+    networks:
+      - instagram-network
+    restart: unless-stopped
+
+  auth-service:
+    build:
+      context: .
+      dockerfile: ./services/auth-service/Dockerfile
+    container_name: auth-service
+    ports:
+      - "5000:5000"
+    environment:
+      - NODE_ENV=development
+      - PORT=5000
+      - FIREBASE_PROJECT_ID=${FIREBASE_PROJECT_ID}
+      - FIREBASE_CLIENT_EMAIL=${FIREBASE_CLIENT_EMAIL}
+      - FIREBASE_PRIVATE_KEY=${FIREBASE_PRIVATE_KEY}
+    volumes:
+      - ./services/auth-service:/app/services/auth-service
+      - ./packages:/app/packages
+      - /app/services/auth-service/node_modules
+      - /app/packages/shared/node_modules
+    networks:
+      - instagram-network
+    restart: unless-stopped
+
+networks:
+  instagram-network:
+    driver: bridge
