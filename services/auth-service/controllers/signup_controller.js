@@ -1,6 +1,6 @@
 import { adminAuth } from "../../../packages/shared/config/firebase.js";
 import Authuser from "../models/auth_user_model.js";
-// import { publishEvent } from "../../../packages/shared/messaging/rabbitmq.js"; 
+// import { publishEvent } from "../../../packages/shared/messaging/rabbitmq.js";
 
 export const signup = async (req, res) => {
   try {
@@ -39,12 +39,12 @@ export const signup = async (req, res) => {
           .json({ error: "Password must be at least 6 characters long" });
       }
       throw authError;
-    }  // nested try/catch 1 ends here
+    } // nested try/catch 1 ends here
 
-    const uid = userRecord.uid; // newly created user's Firebase UID 
+    const uid = userRecord.uid; // newly created user's Firebase UID
 
     // 2) TODO: Publish RabbitMQ event user.created for profile-service (Full profile creation in MongoDB)
-    
+
     // 3) Generate custom token for Flutter client to sign-in
     const customToken = await adminAuth.createCustomToken(uid);
 
@@ -57,5 +57,5 @@ export const signup = async (req, res) => {
       details:
         process.env.NODE_ENV === "development" ? error.message : undefined,
     });
-  }   // main try/catch ends here
+  } // main try/catch ends here
 };
