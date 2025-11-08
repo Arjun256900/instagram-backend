@@ -2,7 +2,7 @@ FROM node:24-alpine
 
 WORKDIR /app
 
-# Copy shared package first
+# Copy shared package
 COPY packages/shared/package*.json ./packages/shared/
 COPY packages/shared ./packages/shared
 
@@ -22,8 +22,8 @@ RUN npm install
 # Expose port
 EXPOSE 5000
 
-# Set working directory to auth-service for npm commands
+# Set working directory for startup
 WORKDIR /app/services/auth-service
 
-# Start the service (this will use package.json in current dir)
+# Start the service
 CMD ["npm", "run", "dev"]
