@@ -11,6 +11,7 @@ services:
       - 80:80
     depends_on:
       - auth-service
+      - gateway-service
     networks:
       - instagram-network
     restart: unless-stopped
@@ -69,6 +70,22 @@ services:
     ports:
       - 5672:5672
       - 15672:15672 # UI port
+    networks:
+      - instagram-network
+    restart: unless-stopped
+  gateway-service:
+    build:
+      context: .
+      dockerfile: ./services/gateway-service/Dockerfile # explicitly specify Dockerfile path (since context is root)
+    container_name: gateway-service
+    environment:
+      - NODE_ENV=development
+      - PORT=4000
+    ports:
+      - 4000:4000
+    depends_on: # Since requests are routed to these services
+      - auth-service
+      - profile-service
     networks:
       - instagram-network
     restart: unless-stopped
