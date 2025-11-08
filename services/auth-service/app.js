@@ -1,7 +1,6 @@
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
-// import loginRoutes from "./routes/login.route.js";
 import signupRoutes from "./routes/signup.route.js";
 
 dotenv.config();
@@ -29,7 +28,6 @@ app.get("/health", (req, res) => {
 });
 
 // Custom routes
-// app.use("/auth", loginRoutes);
 app.use("/auth", signupRoutes);
 
 // 404 handler

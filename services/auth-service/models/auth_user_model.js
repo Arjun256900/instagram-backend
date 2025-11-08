@@ -25,6 +25,11 @@ export class AuthUser {
     });
   }
 
+  static validateEmail(email) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  }
+
   // Validation
   static validate(data) {
     const errors = [];
