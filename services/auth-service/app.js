@@ -28,9 +28,11 @@ app.get("/health", (req, res) => {
   });
 });
 
+
 // Custom routes
 // app.use("/auth", loginRoutes);
 app.use("/auth", signupRoutes);
+
 
 // 404 handler
 app.use((req, res) => {
