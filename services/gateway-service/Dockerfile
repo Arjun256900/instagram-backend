@@ -16,4 +16,4 @@ WORKDIR /app/services/gateway-service
 RUN npm install
 
 EXPOSE 4000
-CMD ["npm", "run", "dev"]
+CMD ["npm", "start"]
