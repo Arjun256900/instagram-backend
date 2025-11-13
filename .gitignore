@@ -9,6 +9,9 @@ package-lock.json
 # Docker
 *.log
 
+k8s/common/secrets.yaml
+**/secrets.yaml
+
 # IDE
 .vscode/
 .idea/

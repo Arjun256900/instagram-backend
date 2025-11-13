@@ -26,4 +26,4 @@ EXPOSE 5000
 WORKDIR /app/services/auth-service
 
 # Start the service
-CMD ["npm", "run", "dev"]
+CMD ["npm", "start"]
