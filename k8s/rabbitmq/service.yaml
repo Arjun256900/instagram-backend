@@ -1,13 +1,13 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: auth-service
+  name: rabbitmq-service
   namespace: instagram-backend
 spec:
   selector:
-    app: auth
+    app: rabbitmq
   ports:
     - protocol: TCP
-      port: 5000
-      targetPort: 5000
+      port: 5672
+      targetPort: 5672
   type: ClusterIP

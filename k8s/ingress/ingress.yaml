@@ -1,0 +1,18 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: instagram-ingress
+  namespace: instagram-backend
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: api.instagram.local
+      http:
+        paths:
+          - path: /api
+            pathType: Prefix
+            backend:
+              service:
+                name: gateway-service
+                port:
+                  number: 4000

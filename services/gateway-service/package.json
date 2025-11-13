@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon server.js"
+    "start": "node server.js"
   },
   "keywords": [],
   "author": "",
@@ -15,8 +15,5 @@
     "dotenv": "^17.2.3",
     "express": "^5.1.0",
     "express-http-proxy": "^2.1.2"
-  },
-  "devDependencies": {
-    "nodemon": "^3.1.10"
   }
 }
