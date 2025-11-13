@@ -25,4 +25,4 @@ EXPOSE 6000
 WORKDIR /app/services/profile-service
 
 # Start the service
-CMD ["npm", "run", "dev"]
+CMD ["npm", "start"]
